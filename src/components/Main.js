@@ -4,17 +4,19 @@ import pen_avatar from '../images/pen_avatar.png';
 import Card from './Card';
 
 function Main({ cards, onCardClick, handleAvatarClick, handleEditClick, handleAddClick }) {
-    const [data, setData] = useState([])
+    const [currentUser, setCurrentUser] = useState({})
 
     useState(() => {
-        api.getInitialMe().then(data => {
-            setData(data);
+        api.getInitialMe().then(currentUser => {
+            setCurrentUser(currentUser);
+        }).catch((err) => {
+            console.log(err);
         })
-    })
+    });
 
-    const userAvatar = data.avatar;
-    const userName = data.name;
-    const userDescription = data.about;
+    const userAvatar = currentUser.avatar;
+    const userName = currentUser.name;
+    const userDescription = currentUser.about;
 
     return (
         <>
@@ -32,7 +34,7 @@ function Main({ cards, onCardClick, handleAvatarClick, handleEditClick, handleAd
             </section>
             <section className="cards">
                 <ul className="elements">
-                    {cards.map((card, i) => <Card key={i} card={card} onCardClick={onCardClick} onClick={_ => onCardClick(card)} cardLink={card.link} cardTitle={card.name} likesCounter={card.likes.length} />)}
+                    {cards.map((card) => <Card key={card._id} card={card} onCardClick={onCardClick} />)}
                 </ul>
             </section>
         </>

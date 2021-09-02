@@ -6,35 +6,36 @@ import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import PopupEditContent from './PopupEditContent';
 import PopupAddContent from './PopupAddContent';
-// import PopupAcceptContent from './PopupAcceptContent';
 import PopupAvatarContent from './PopupAvatarContent';
 import api from '../utils/Api';
 
 function App() {
 
-  const [data, setData] = useState([]);
-  
-  const [card, setCard] = useState(null);
-  const onCardClick = card => setCard(card);
+  const [cards, setCards] = useState([]);
 
-  const [isEditProfilePopupOpen, setisEditProfilePopupOpen] = useState(false);
-  const [isAddPlacePopupOpen, setisAddPlacePopupOpen] = useState(false);
-  const [isEditAvatarPopupOpen, setisEditAvatarPopupOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
+  const onCardClick = selectedCard => setSelectedCard(selectedCard);
 
-  const onEditAvatar = () => { setisEditAvatarPopupOpen(true); };
-  const onEditProfile = () => { setisEditProfilePopupOpen(true); };
-  const onAddPlace = () => { setisAddPlacePopupOpen(true); };
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+
+  const onEditAvatar = () => { setIsEditAvatarPopupOpen(true); };
+  const onEditProfile = () => { setIsEditProfilePopupOpen(true); };
+  const onAddPlace = () => { setIsAddPlacePopupOpen(true); };
 
   const closeAllPopups = () => {
-    setisEditAvatarPopupOpen(false);
-    setisEditProfilePopupOpen(false);
-    setisAddPlacePopupOpen(false);
-    setCard(null);
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setSelectedCard(null);
   }
 
   useEffect(() => {
-    api.getInitialCards().then(data => {
-      setData(data)
+    api.getInitialCards().then(cards => {
+      setCards(cards)
+    }).catch((err) => {
+      console.log(err);
     })
   }, [])
 
@@ -42,17 +43,17 @@ function App() {
     <div style={{ backgroundColor: `black` }}>
       <div className='page'>
         <Header />
-        <Main cards={data} onCardClick={onCardClick} handleEditClick={onEditProfile} handleAddClick={onAddPlace} handleAvatarClick={onEditAvatar} />
-        <PopupWithForm name={'edit'} isOpen={isEditProfilePopupOpen} closeAllPopups={closeAllPopups}>
+        <Main cards={cards} onCardClick={onCardClick} handleEditClick={onEditProfile} handleAddClick={onAddPlace} handleAvatarClick={onEditAvatar} />
+        <PopupWithForm name={'edit'} popupTitle={'Редактировать профиль'} btnName={'Сохранить'} isOpen={isEditProfilePopupOpen} closeAllPopups={closeAllPopups}>
           <PopupEditContent />
         </PopupWithForm>
-        <PopupWithForm name={'add'} isOpen={isAddPlacePopupOpen} closeAllPopups={closeAllPopups}>
+        <PopupWithForm name={'add'} popupTitle={'Новое место'} btnName={'Создать'} isOpen={isAddPlacePopupOpen} closeAllPopups={closeAllPopups}>
           <PopupAddContent />
         </PopupWithForm>
-        <PopupWithForm name={'avatar'} isOpen={isEditAvatarPopupOpen} closeAllPopups={closeAllPopups}>
+        <PopupWithForm name={'avatar'} popupTitle={'Обновить аватар'} btnName={'Сохранить'} isOpen={isEditAvatarPopupOpen} closeAllPopups={closeAllPopups}>
           <PopupAvatarContent />
         </PopupWithForm>
-        <ImagePopup card={card} closeAllPopups={closeAllPopups} />
+        <ImagePopup card={selectedCard} closeAllPopups={closeAllPopups} />
         <Footer />
       </div>
     </div>

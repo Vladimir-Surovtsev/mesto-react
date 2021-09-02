@@ -1,10 +1,10 @@
 import React from 'react';
+import PopupWithForm from './PopupWithForm';
 
 function PopupEditContent() {
 
     return (
         <>
-            <h2 className="popup__title">Редактировать профиль</h2>
             <label className="popup__field">
                 <input name="name" type="text" id="name-input" className="popup__input" defaultValue="" required
                     minLength="2" maxLength="40" />
@@ -15,7 +15,6 @@ function PopupEditContent() {
                     minLength="2" maxLength="200" />
                 <span className="popup__input-error job-input-error"></span>
             </label>
-            <button type="submit" className="popup__button popup__save-button">Сохранить</button>
         </>
     );
 }

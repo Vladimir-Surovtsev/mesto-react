@@ -2,7 +2,7 @@ class Api {
     constructor(key, baseUrl) {
         this._key = key;
         this._baseUrl = baseUrl;
-        this._then = res => {
+        this._getResaultFetch = res => {
             if (res.ok) {
                 return res.json();
             }
@@ -17,7 +17,7 @@ class Api {
                     'Content-Type': 'application/json'
                 }
             })
-            .then(this._then)
+            .then(this._getResaultFetch)
     }
 
     getInitialCards() {
@@ -27,7 +27,7 @@ class Api {
                     'Content-Type': 'application/json'
                 }
             })
-            .then(this._then)
+            .then(this._getResaultFetch)
     }
 
     editeProfile(userName, aboutUser) {
@@ -42,7 +42,7 @@ class Api {
                     about: aboutUser
                 })
             })
-            .then(this._then)
+            .then(this._getResaultFetch)
     }
 
     initialNewCard(cardName, cardLink) {
@@ -57,7 +57,7 @@ class Api {
                     link: cardLink
                 })
             })
-            .then(this._then)
+            .then(this._getResaultFetch)
     }
 
     addLike(id) {
@@ -68,7 +68,7 @@ class Api {
                     'Content-Type': 'application/json'
                 }
             })
-            .then(this._then)
+            .then(this._getResaultFetch)
     }
 
     deleteLike(id) {
@@ -79,7 +79,7 @@ class Api {
                     'Content-Type': 'application/json'
                 }
             })
-            .then(this._then)
+            .then(this._getResaultFetch)
     }
 
     deleteCard(id) {
@@ -90,7 +90,7 @@ class Api {
                     'Content-Type': 'application/json'
                 }
             })
-            .then(this._then)
+            .then(this._getResaultFetch)
     }
 
     changeAvatar(avatarLink) {
@@ -104,7 +104,7 @@ class Api {
                     avatar: avatarLink
                 })
             })
-            .then(this._then)
+            .then(this._getResaultFetch)
     }
 
 }
