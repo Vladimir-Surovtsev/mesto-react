@@ -26,12 +26,31 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
 
     return (
         <li className="elements__element">
-            <img className="elements__image" src={card.link} alt={card.name} onClick={() => onCardClick(card)} />
-            <button type="button" className={cardDeleteButtonClassName} aria-label="Корзина" onClick={handleDeleteClick}></button>
+            <img
+                className="elements__image"
+                src={card.link}
+                alt={card.name}
+                onClick={() => onCardClick(card)}
+            />
+            <button
+                type="button"
+                className={cardDeleteButtonClassName}
+                aria-label="Корзина"
+                onClick={handleDeleteClick}
+            >
+
+            </button>
             <div className="elements__body">
                 <h2 className="elements__title">{card.name}</h2>
                 <div className="elements__like-group">
-                    <button type="button" className={cardLikeButtonClassName} aria-label="Нравится" onClick={handleLikeClick}></button>
+                    <button
+                        type="button"
+                        className={cardLikeButtonClassName}
+                        aria-label="Нравится"
+                        onClick={handleLikeClick}
+                    >
+
+                    </button>
                     <p className="elements__like-counter">{card.likes.length}</p>
                 </div>
             </div>

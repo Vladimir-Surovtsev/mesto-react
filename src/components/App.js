@@ -40,10 +40,11 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setSelectedCard(null);
     setIsDeleteCardPopupOpen(false);
-    setCardDelete(undefined);
+    setCardDelete(null);
   }
 
   useEffect(() => {
+    setIsCardsLoading(true);
     api.getInitialCards().then(cards => {
       setCards(cards)
     }).catch(err => setIsCardsLoadError(err))

@@ -3,15 +3,26 @@ import PopupWithForm from "./PopupWithForm";
 import { useFormValidation } from "../hooks/forms";
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
-function EditProfilePopup({ isOpen, onUpdateUser, onClose, isLoading }) {
+function EditProfilePopup({
+    isOpen,
+    onUpdateUser,
+    onClose,
+    isLoading
+}) {
     const currentUser = useContext(CurrentUserContext);
-    const { values, handleChange, resetForm, errors, isValid } = useFormValidation();
+    const {
+        values,
+        handleChange,
+        resetForm,
+        errors,
+        isValid
+    } = useFormValidation();
 
     useEffect(() => {
         if (currentUser) {
             resetForm(currentUser, {}, true);
         }
-    }, [currentUser, resetForm]);
+    }, [currentUser, resetForm, isOpen]);
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -20,8 +31,8 @@ function EditProfilePopup({ isOpen, onUpdateUser, onClose, isLoading }) {
 
     return (
         <PopupWithForm
-            name={'edit'}
-            popupTitle={'Редактировать профиль'}
+            name={"edit"}
+            popupTitle={"Редактировать профиль"}
             btnText={isLoading ? "Сохранение..." : "Сохранить"}
             isOpen={isOpen}
             onClose={onClose}
@@ -33,11 +44,11 @@ function EditProfilePopup({ isOpen, onUpdateUser, onClose, isLoading }) {
                     type="text"
                     id="name-input"
                     className="popup__input"
-                    defaultValue={values.name}
+                    value={values.name || ""}
                     required
                     minLength="2" maxLength="40"
                     onChange={handleChange} />
-                <span className="popup__input-error">{errors.name}</span>
+                <span className="popup__input-error">{errors.name || ""}</span>
             </label>
             <label className="popup__field">
                 <input
@@ -45,11 +56,11 @@ function EditProfilePopup({ isOpen, onUpdateUser, onClose, isLoading }) {
                     type="text"
                     id="job-input"
                     className="popup__input"
-                    defaultValue={values.about}
+                    value={values.about || ""}
                     required
                     minLength="2" maxLength="200"
                     onChange={handleChange} />
-                <span className="popup__input-error">{errors.about}</span>
+                <span className="popup__input-error">{errors.about || ""}</span>
             </label>
         </PopupWithForm>
     );

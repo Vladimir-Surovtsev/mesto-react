@@ -16,9 +16,9 @@ function AddPlacePopup({ isOpen, onClose, onAddPlaceSubmit, isLoading }) {
 
     return (
         <PopupWithForm
-            name={'add'}
-            popupTitle={'Новое место'}
-            btnText={'Создать'}
+            name={"add"}
+            popupTitle={"Новое место"}
+            btnText={isLoading ? "Сохранение..." : "Создать"}
             isOpen={isOpen}
             onClose={onClose}
             onSubmit={handleSubmit}
@@ -33,7 +33,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlaceSubmit, isLoading }) {
                     required minLength="2" maxLength="30"
                     value={values.name || ""}
                     onChange={handleChange} />
-                <span className="popup__input-error">{errors.name}</span>
+                <span className="popup__input-error">{errors.name || ""}</span>
             </label>
             <label className="popup__field">
                 <input
@@ -45,7 +45,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlaceSubmit, isLoading }) {
                     required
                     value={values.link || ""}
                     onChange={handleChange} />
-                <span className="popup__input-error">{errors.link}</span>
+                <span className="popup__input-error">{errors.link || ""}</span>
             </label>
         </PopupWithForm>
     );
