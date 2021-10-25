@@ -2,7 +2,7 @@ class Api {
     constructor(key, baseUrl) {
         this._key = key;
         this._baseUrl = baseUrl;
-        this._getResaultFetch = res => {
+        this._getResultFetch = res => {
             if (res.ok) {
                 return res.json();
             }
@@ -10,28 +10,28 @@ class Api {
         }
     }
 
-    getInitialMe() {
-        return fetch(this._baseUrl + 'users/me', {
+    getUserInfo() {
+        return fetch(`${this._baseUrl}users/me`, {
                 headers: {
                     authorization: this._key,
                     'Content-Type': 'application/json'
                 }
             })
-            .then(this._getResaultFetch)
+            .then(this._getResultFetch)
     }
 
     getInitialCards() {
-        return fetch(this._baseUrl + 'cards', {
+        return fetch(`${this._baseUrl}cards`, {
                 headers: {
                     authorization: this._key,
                     'Content-Type': 'application/json'
                 }
             })
-            .then(this._getResaultFetch)
+            .then(this._getResultFetch)
     }
 
-    editeProfile(userName, aboutUser) {
-        return fetch(this._baseUrl + 'users/me', {
+    editProfile(userName, aboutUser) {
+        return fetch(`${this._baseUrl}users/me`, {
                 method: 'PATCH',
                 headers: {
                     authorization: this._key,
@@ -42,11 +42,11 @@ class Api {
                     about: aboutUser
                 })
             })
-            .then(this._getResaultFetch)
+            .then(this._getResultFetch)
     }
 
     initialNewCard(cardName, cardLink) {
-        return fetch(this._baseUrl + 'cards', {
+        return fetch(`${this._baseUrl}cards`, {
                 method: 'POST',
                 headers: {
                     authorization: this._key,
@@ -57,44 +57,33 @@ class Api {
                     link: cardLink
                 })
             })
-            .then(this._getResaultFetch)
+            .then(this._getResultFetch)
     }
 
-    addLike(id) {
-        return fetch(this._baseUrl + `cards/likes/${id}`, {
-                method: 'PUT',
-                headers: {
-                    authorization: this._key,
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(this._getResaultFetch)
-    }
-
-    deleteLike(id) {
-        return fetch(this._baseUrl + `cards/likes/${id}`, {
-                method: 'DELETE',
-                headers: {
-                    authorization: this._key,
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(this._getResaultFetch)
-    }
+    changeLikeCardStatus(id, like) {
+        return fetch(`${this._baseUrl}cards/likes/${id}`, {
+          method: like ? 'PUT' : 'DELETE',
+          headers: {
+            authorization: this._key,
+            'Content-Type': 'application/json',
+          },
+        })
+          .then(this._getResultFetch)
+      }
 
     deleteCard(id) {
-        return fetch(this._baseUrl + `cards/${id}`, {
+        return fetch(`${this._baseUrl}cards/${id}`, {
                 method: 'DELETE',
                 headers: {
                     authorization: this._key,
                     'Content-Type': 'application/json'
                 }
             })
-            .then(this._getResaultFetch)
+            .then(this._getResultFetch)
     }
 
     changeAvatar(avatarLink) {
-        return fetch(this._baseUrl + 'users/me/avatar', {
+        return fetch(`${this._baseUrl}users/me/avatar`, {
                 method: 'PATCH',
                 headers: {
                     authorization: this._key,
@@ -104,7 +93,7 @@ class Api {
                     avatar: avatarLink
                 })
             })
-            .then(this._getResaultFetch)
+            .then(this._getResultFetch)
     }
 
 }
