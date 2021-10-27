@@ -43,7 +43,11 @@ function EditAvatarPopup({
                     value={values.avatar || ""}
                     onChange={handleChange}
                     required />
-                <span className="popup__input-error">{errors.avatar || ""}</span>
+                <span
+                    className={`popup__input-error ${errors.avatar ? "popup__input-error_visible" : ""}`}
+                >
+                    {errors.avatar || ""}
+                </span>
             </label>
         </PopupWithForm>
     );

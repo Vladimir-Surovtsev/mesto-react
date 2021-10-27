@@ -48,7 +48,11 @@ function EditProfilePopup({
                     required
                     minLength="2" maxLength="40"
                     onChange={handleChange} />
-                <span className="popup__input-error">{errors.name || ""}</span>
+                <span
+                    className={`popup__input-error ${errors.name ? "popup__input-error_visible" : ""}`}
+                >
+                    {errors.name || ""}
+                </span>
             </label>
             <label className="popup__field">
                 <input
@@ -60,7 +64,11 @@ function EditProfilePopup({
                     required
                     minLength="2" maxLength="200"
                     onChange={handleChange} />
-                <span className="popup__input-error">{errors.about || ""}</span>
+                <span
+                    className={`popup__input-error ${errors.about ? "popup__input-error_visible" : ""}`}
+                >
+                    {errors.about || ""}
+                </span>
             </label>
         </PopupWithForm>
     );

@@ -33,7 +33,11 @@ function AddPlacePopup({ isOpen, onClose, onAddPlaceSubmit, isLoading }) {
                     required minLength="2" maxLength="30"
                     value={values.name || ""}
                     onChange={handleChange} />
-                <span className="popup__input-error">{errors.name || ""}</span>
+                <span
+                    className={`popup__input-error ${errors.name ? "popup__input-error_visible" : ""}`}
+                >
+                    {errors.name || ""}
+                </span>
             </label>
             <label className="popup__field">
                 <input
@@ -45,7 +49,11 @@ function AddPlacePopup({ isOpen, onClose, onAddPlaceSubmit, isLoading }) {
                     required
                     value={values.link || ""}
                     onChange={handleChange} />
-                <span className="popup__input-error">{errors.link || ""}</span>
+                <span
+                    className={`popup__input-error ${errors.link ? "popup__input-error_visible" : ""}`}
+                >
+                    {errors.link || ""}
+                </span>
             </label>
         </PopupWithForm>
     );
